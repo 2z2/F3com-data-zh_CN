@@ -148,7 +148,7 @@ $f3->sync('SESSION'); // 确保PHP全局变量 `SESSION` 和F3变量的 `SESSION
 
 ### ref
 
-**Get reference to hive key and its contents**
+**通过`hive`键得到它的参照以及内容**
 
 ```php
 mixed &ref ( string $key [, bool $add = true ] )
@@ -158,12 +158,12 @@ Usage:
 
 ```php
 $f3->set('name','John');
-$b = &$f3->ref('name'); // $b is a reference to framework variable 'name' , not a copy
+$b = &$f3->ref('name'); // $b是框架变量`name`的参照变量,而不是拷贝
 $b = 'Chuck'; // modifiying the reference updates the framework variable 'name'
 echo $f3->get('name'); // Chuck
 ```
 
-You can also add non-existent hive keys, array elements, and object properties, when 2nd argument is TRUE by default.
+你也添加当前不存在的`hive`键,如数组元素,对象属性。第二个参数默认是`TRUE`.
 
 ```php
 
@@ -186,19 +186,19 @@ $my_array = $f3->get('hero');
 echo $my_array['name']; // 'SpongeBob'
 ```
 
-If the 2nd argument `$add` is `false`, it just returns the read-only hive key content. This behaviour is used by get(). If the hive key does not exist, it returns NULL.
+如果第二个参数 `$add` 是 `false`, 它只会返回给你`只读`的hive key的内容,这种行为仅仅类似调用来get()方法,如果hive key不存在,返回NULL.
 
 ### exists
 
-**Return TRUE if the hive key is not set (or return timestamp and TTL if cached)**
+**如果key并未设置，返回`TRUE`反之返回已经已缓存key的时间戳和TTL**
 
 ```php
 bool exists ( string $key [, mixed &$val=NULL] )
 ```
 
-The `exists` function also checks the Cache backend storage when the key is not found in the hive. If the key is found in cache, it then returns `array ( $timestamp, $ttl )`.
+`exists` 方法在并未在`hive`中找到该key的情况下进行Cache的后端存储检查，如果缓存中找到了key则会直接返回`array ( $timestamp, $ttl )`.
 
-<div class="alert alert-info"><strong>Notice:</strong> exists uses PHP's `isset()` function to determine if the hive key is set and is not NULL.</div>
+<div class="alert alert-info"><strong>提示:</strong> `exists`方法是用来PHP中的`isset()`方法来判断`hive`key是否设置以及其是否为空.</div>
 
 Usage:
 
@@ -209,28 +209,28 @@ $f3->exists('foo'); // true
 $f3->exists('bar'); // false, was not set above
 ```
 
-`exists` is especially useful with [PHP global variables automatically synched by F3](base#sync):
+`exists` 配合 [PHP global variables automatically synched by F3](base#sync)使用特别方便:
 
 ```php
-// Synched hive keys with PHP global variables
+// 已经与`hive`同步过的PHP全局变量
 $f3->exists('COOKIE.userid');
 $f3->exists('SESSION.login');
 $f3->exists('POST.submit');
 ```
 
-<div class="alert alert-warning"><strong>Notice:</strong> If you check the existence of a SESSION key, the session get started automatically.</div>
+<div class="alert alert-warning"><strong>提示:</strong> 如果你检查SESSION 键是否存在时，该session会自动启动.</div>
 
 ### devoid
 
-**Return TRUE if the hive key is empty and not cached**
+**如果`hive`的key为空且没有缓存，则返回TRUE**
 
 ```php
 bool devoid ( string $key )
 ```
 
-The `devoid` function also checks the Cache backend storage, if the key was not found in the hive.
+如果`hive`中没有找到该key,`devoid`方法会检查后台缓存存储.
 
-<div class="alert alert-info"><strong>Notice:</strong> devoid uses PHP's `empty()` function to determine if the hive key is empty and not cached.</div>
+<div class="alert alert-info"><strong>提示:</strong> 'devoid'使用了PHP中的empty()方法来判断一个hive key是否为空以及是否缓存.</div>
 
 Usage:
 
@@ -246,20 +246,20 @@ $f3->devoid('baz'); // false
 
 ### clear
 
-**Unset hive key, key no longer exists**
+**注销`hive`键值，该键不再存在**
 
 ```php
 void clear ( string $key )
 ```
 
-To remove a hive key and its value completely from memory:
+完全从内存中移除一个hive key以及他的值:
 
 ```php
 $f3->clear('foobar');
 $f3->clear('myArray.param1'); // removes key `param1` from array `myArray`
 ```
 
-If the given hive key was cached before, it will be cleared from cache too.
+如果给出的参数key之前已经被缓存过，该方法也会从缓存中一并移除.
 
 Some more special usages:
 
@@ -269,11 +269,11 @@ $f3->clear('COOKIE.foobar'); // removes a cookie
 $f3->clear('CACHE'); // clears all cache contents
 ```
 
-<div class="alert alert-info"><strong>Notice:</strong> Clearing all cache contents at once is not supported for the XCache cache backend</div>
+<div class="alert alert-info"><strong>提示:</strong> 后端XCache缓存不支持一次性清除所有缓存内容</div>
 
 ### mset
 
-**Multi-variable assignment using associative array**
+**使用关联数组设置多个变量**
 
 ```php
 void mset ( array $vars [, string $prefix = '' [, integer $ttl = 0 ]] )
@@ -295,7 +295,7 @@ echo $f3->get('var2'); // value2
 echo $f3->get('var3'); // value3
 ```
 
-You can append all key names using the 2nd argument `$prefix`.
+你可以设置第二个参数`$prefix`来统一增加所有变量的前缀.
 
 ```php
 $f3->mset(
@@ -312,11 +312,11 @@ echo $f3->get('pre_var2'); // value2
 echo $f3->get('pre_var3'); // value3
 ```
 
-To cache all vars, set a positive numeric integer value to `$ttl` in seconds.
+如果你想缓存这些变量，直接设定第三个变量`$ttl`即可，约定该参数为正整数，单位是秒.
 
 ### hive
 
-**Return the whole hive contents as an array**
+**以数组形式返回所有`hive`内容**
 
 ```php
 array hive ()
