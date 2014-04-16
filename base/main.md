@@ -1,26 +1,26 @@
 # Base
 
-The Base class represents the framework core. It contains everything you need to run a simple application. The file `base.php` also includes the essential [Cache](cache), [Prefab](prefab-registry), [View](view), [ISO](iso) and [Registry](prefab-registry#registry) classes to reduce unnecessary disk I/O for optimal performance.
+基本类体现了框架的核心。它包含了运行一个应用所需的大多功能,基本类文件 `base.php` 包含了基本且必要的 [Cache](cache), [Prefab](prefab-registry), [View](view), [ISO](iso) and [Registry](prefab-registry#registry) 类减少不必要的磁盘I/O开销从而达到最佳表现状态.
 
-Feel free to remove all other files in the `lib/` directory, if all you need are the basic features provided by this package.
+如果你需要的仅仅是这个包内的基础的特色功能,你可以随心所欲的移除`lib/`目录下的其他任何文件。
 
-Namespace: `\` <br/>
-File location: `lib/base.php`
+命名空间: `\` <br/>
+文件位置: `lib/base.php`
 
 ---
 
 ## The Hive
 
-The hive is a memory array to hold your framework variables in the form of key / value pairs. Storing a value in the hive ensures it is globaly available to all classes and methods in your application.
+`hive`是以`键/值`的形式存储框架中变量的内存数组,存储在`hive`的值确保了变量可以在应用中的所有类和方法是用。
 
 ### set
 
-**Bind value to hive key**
+**将值绑定在 `hive` 的一个键上,形成键/值对**
 
 ```php
 mixed set ( string $key, mixed $val [, int $ttl = 0 ] )
 ```
-*Examples of setting framework variables:*
+*示例：设置框架变量:*
 
 ```php
 $f3->set('a',123); // a=123, integer
@@ -28,7 +28,7 @@ $f3->set('b','c'); // b='c', string
 $f3->set('c','whatever'); // c='whatever', string
 $f3->set('d',TRUE); // d=TRUE, boolean
 ```
-*Setting arrays:*
+*示例:设置数组*
 
 ```php
 $f3->set('hash',array( 'x'=>1,'y'=>2,'z'=>3 ) );
@@ -37,7 +37,7 @@ $f3->set('hash.x',1);
 $f3->set('hash.y',2);
 $f3->set('hash.z',3);
 ```
-*Setting objects properties:*
+*示例:设置对象*
 
 ```php
 $f3->set('a',new \stdClass);
@@ -47,10 +47,10 @@ echo $f3->get('a')->hello; // world
 
 #### Caching properties
 
-If the `$ttl` parameter is > 0, and the [framework cache engine](cache) is enabled, the specified variable will be cached for `$ttl` seconds. Already cached vars will be updated and get the new expiration `$ttl`.
-If the key was already cached before and `$ttl` is 0, then the key value will also be updated in cache, by reusing the old expiration time.
+如果 `$ttl` 参数是大于0的( > 0 ), 并且[framework cache engine](cache)开启, 指定的变量将会被缓存 `$ttl` 秒,只有获得新的到期`$ttl`时已经缓存的变量才会被更新。
+如果该`key`在之前已经被缓存了并且`$ttl`设置的是0, 这个键值在`cache`也会被更新, 方式是恢复旧的过期时间。
 
-You can cache strings, arrays and all other types - even complete objects. `get()` will load them automatically from the cache.
+你可以缓存字符串,数组或者其他类型,甚至是已经完成的对象,`get()`方法会从`cache`中自动装载他们。
 
 *Examples of caching framework variables:*
 
