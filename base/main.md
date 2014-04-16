@@ -498,7 +498,7 @@ array|NULL shift ( string $key )
 返回左移的`hive`数组变量或者当数组变量已经为空或不是一个数组时返回`NULL`. 
 
 <div class="alert alert-warning">
-<b>提示</b>: <code>shift</code> use the PHP function <code>array_shift()</code>. It means that all numerical array keys of the hive array variable will be modified to start counting from zero while literal keys won't be touched
+<b>提示</b>: <code>shift</code> 使用PHP中的<code>array_shift()</code>方法. It means that all numerical array keys of the hive array variable will be modified to start counting from zero while literal keys won't be touched
 </div>
 
 Example:
