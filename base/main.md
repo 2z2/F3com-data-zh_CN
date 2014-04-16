@@ -330,13 +330,13 @@ printf ("A Busy Hive: <pre>%s</pre>", var_export( $f3->hive(), true ) );
 
 ### copy
 
-**Copy contents of a hive variable to another**
+**拷贝`hive`一变量的内容到另外一个变量上**
 
 ```php
 mixed copy ( string $src, string $dst )
 ```
 
-Return a writable reference to a new `$dst` hive key. If `$dst` already exists in the hive, it simply gets overwritten.
+返回一个可写的引用给`$dst`hive键,如果`$dst`已经存在于hive中，该方法将会毫不犹豫的覆盖它.
 
 Usage:
 
@@ -351,13 +351,13 @@ echo $f3->get('bar'); // '456'
 
 ### concat
 
-**Concatenate string to hive string variable**
+**连接字符串并存为`hive`字符串变量**
 
 ```php
 string concat ( string $key, string $val )
 ```
 
-Return result of the concatenation. **Note**: If `$key` does not exist in the hive, it is automatically created in the hive.
+返回拼接的结果. **提示**: 如果`$key`在`hive`并不存在，该方法将会自动在`hive`中自动创建.
 
 Usage:
 
@@ -372,7 +372,7 @@ echo $f3->get('wall'); // 99 bottles of beer on the wall
 
 ### flip
 
-**Swap keys and values of hive array variable**
+**交换`hive`中数组变量的键和值**
 
 ```php
 array flip ( string $key )
@@ -401,7 +401,7 @@ Array
 
 ### push
 
-**Add element to the end of hive array variable**
+**在`hive`数组变量的尾部(最后面)添加一个元素**
 
 ```php
 mixed push ( string $key, mixed $val )
@@ -431,7 +431,7 @@ Array
 
 ### pop
 
-**Remove last element of hive array variable**
+**从`hive`数组变量中移除最后一个元素**
 
 ```php
 mixed pop ( string $key )
@@ -459,7 +459,7 @@ Array
 
 ### unshift
 
-**Add element to the beginning of hive array variable**
+**在`hive`数组变量的头部(最开始)添加一个元素**
 
 ```php
 mixed unshift ( string $key, string $val )
@@ -489,16 +489,16 @@ Array
 
 ### shift
 
-**Remove first element of a hive array variable**
+**从`hive`数组变量中移除第一个元素**
 
 ```php
 array|NULL shift ( string $key )
 ```
 
-Return the left-shifted hive array variable, or `NULL` if the hive array variable is empty or is not an array. 
+返回左移的`hive`数组变量或者当数组变量已经为空或不是一个数组时返回`NULL`. 
 
 <div class="alert alert-warning">
-<b>Notice</b>: <code>shift</code> use the PHP function <code>array_shift()</code>. It means that all numerical array keys of the hive array variable will be modified to start counting from zero while literal keys won't be touched
+<b>提示</b>: <code>shift</code> use the PHP function <code>array_shift()</code>. It means that all numerical array keys of the hive array variable will be modified to start counting from zero while literal keys won't be touched
 </div>
 
 Example:
