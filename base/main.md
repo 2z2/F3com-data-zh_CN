@@ -52,7 +52,7 @@ echo $f3->get('a')->hello; // world
 
 你可以缓存字符串,数组或者其他类型,甚至是已经完成的对象,`get()`方法会从`cache`中自动装载他们。
 
-*Examples of caching framework variables:*
+*示例:缓存框架变量*
 
 ```php
 // cache string
@@ -72,7 +72,7 @@ $f3->set('COOKIE.bar', 456, 86400); // 1 day
 
 #### System variables
 
-The framework has its own [system variables] (quick-reference#system-variables). You can change them to modify a framework behaviour, for example:
+框架已经拥有一些自己的系统变量[system variables] (quick-reference#system-variables) ,你可以修改他们在改变框架的行为表现, 例如:
 
 ```php
 $f3->set('CACHE', TRUE);
@@ -80,31 +80,31 @@ $f3->set('HALT', FALSE);
 $f3->set('CASELESS', FALSE);
 ```
 
-It is also possible to set the PHP globals through F3's [COOKIE, GET, POST, REQUEST, SESSION, FILES, SERVER, ENV system variables](quick-reference#cookie,-get,-post,-request,-session,-files,-server,-env). These 8 variables are automatically in synch with the underlying PHP globals.
+用F3框架是可以设置PHP的全局变量的[COOKIE, GET, POST, REQUEST, SESSION, FILES, SERVER, ENV system variables](quick-reference#cookie,-get,-post,-request,-session,-files,-server,-env),这8个变量会与相关的PHP全局变量同步。
 
-<div class="alert alert-info"><strong>Notice:</strong> If you set or access a key of SESSION, the session gets started automatically. There's no need for you to do it by yourself.</div>
+<div class="alert alert-info"><strong>提示:</strong> 如果你设置了或者访问了SESSION的键, 那么这个session会自动开始而不需要你手动去开始他.</div>
 
-**Remember**: Hive keys are _case-sensitive_.<br/>Furthermore, root hive keys are checked for validity against these allowed chars: [&nbsp;a-z&nbsp;A-Z&nbsp;0-9&nbsp;_&nbsp;]
+**谨记**: `Hive`的键是非常敏感的,<br/>所以,根`hive`键会对如下允许的字符:[&nbsp;a-z&nbsp;A-Z&nbsp;0-9&nbsp;_&nbsp;]进行有效性检查。
 
 ### get
 
-**Retrieve contents of hive key**
+**通过`hive`键取回对应的值**
 
 ```php
 mixed get ( string $key [, string|array $args = NULL ] )
 ```
 
-to get a previously saved framework var, use:
+预获取之前已经存储的框架变量,接着看:
 
 ```php
 $f3->set('myVar','hello world');
-echo $f3->get('myVar'); // outputs the string 'hello world'
-$local_var = $f3->get('myVar'); // $local_var holds the string 'hello world'
+echo $f3->get('myVar'); // 输出字符串 'hello world'
+$local_var = $f3->get('myVar'); // 变量$local_var 已经拿到了 'hello world'
 ```
 
-<div class="alert alert-info"><strong>Notice:</strong> When caching is enabled and the var hasn't been defined at runtime before, F3 tries to load the var from Cache when using get().</div>
+<div class="alert alert-info"><strong>提示:</strong> 当缓存开启并且变量并未在运行时被定义,使用get()方法时,F3会尝试从Cache中装载数据.</div>
 
-Accessing arrays is easy. You can also use the JS dot notation `'myarray.bar'`, which makes it much easier to read and write.
+访问数组尤为方便. 你也可以使用JS.记号法形如`'myarray.bar'`,这样更易于阅读和写.
 <!-- special alignment ez 2 read 4 beginners -->
 
 ```php
@@ -121,13 +121,13 @@ $f3->set('myarray',
 echo $f3->get('myarray[0]'); // value_0
 echo $f3->get('myarray.1'); // value_1
 echo $f3->get('myarray.bar'); // 123
-echo $f3->get('myarray["foo"]'); // we like candy
+echo $f3->get('myarray["foo"]'); // aha,我们爱语法糖
 echo $f3->get('myarray[baz]'); // 4.56, notice alternate use of single, double and no quotes
 ```
 
 ### sync
 
-**Sync PHP global variable with corresponding hive key**
+**同步相应的`hive`键值到PHP全局变量**
 
 ```php
 array sync ( string $key )
@@ -136,11 +136,11 @@ array sync ( string $key )
 Usage:
 
 ```php
-$f3->sync('SESSION'); // ensures PHP global var SESSION is the same as F3 variable SESSION
+$f3->sync('SESSION'); // 确保PHP全局变量 `SESSION` 和F3变量的 `SESSION`相同
 ```
 
 <div class="alert alert-info">
-    F3 will automatically sync the following PHP globals:
+    F3框架会自动同步如下PHP全局变量:
     <b>GET</b>, <b>POST</b>, <b>COOKIE</b>, <b>REQUEST</b>, <b>SESSION</b>, <b>FILES</b>, <b>SERVER</b>, <b>ENV</b>
 </div>
 
