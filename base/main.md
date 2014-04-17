@@ -498,7 +498,7 @@ array|NULL shift ( string $key )
 返回左移的`hive`数组变量或者当数组变量已经为空或不是一个数组时返回`NULL`. 
 
 <div class="alert alert-warning">
-<b>提示</b>: <code>shift</code> 使用PHP中的<code>array_shift()</code>方法. 这意味着It means that all numerical array keys of the hive array variable will be modified to start counting from zero while literal keys won't be touched
+<b>提示</b>: <code>shift</code> 使用PHP中的<code>array_shift()</code>方法. 这意味着hive数组变量的所有数字数组键将被修改为从0开始计数,文字的键不受影响
 </div>
 
 Example:
@@ -524,13 +524,13 @@ Array
 
 ### merge
 
-**Merge array with hive array variable**
+**合并数组到`hive`数组变量**
 
 ```php
 array merge ( string $key, array $src )
 ```
 
-Return the resulting array of the merge. (Does not touch the value of the hive key)
+返回合并后的数组(该操作不会修改`hive`中任何键对应的值)
 
 Example:
 
@@ -553,7 +553,7 @@ array (size=4)
 
 ### fixslashes
 
-**Convert backslashes to slashes**
+**把反斜杠转为斜杠**
 
 ```php
 string fixslashes ( string $str )
@@ -568,7 +568,7 @@ $filepath = $f3->fixslashes($filepath); // /www/mysite/myfile.txt
 
 ### split
 
-**Split comma-, semi-colon, or pipe-separated string**
+**以逗号,分号,竖杠分割字符串**
 
 ```php
 array split ( string $str )
