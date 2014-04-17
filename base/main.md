@@ -592,15 +592,15 @@ Array
 
 ### stringify
 
-**Convert PHP expression/value to compressed exportable string**
+**将PHP表达式/值压缩为一个可执行的字符串**
 
 ```php
 string stringify ( mixed $arg [, array $stack = NULL ] )
 ```
 
-This function allows you to convert any PHP expression, value, array or any object to a compressed and exportable string.
+该方法提给给我们用来转换任何PHP表达式、值、数组或者对象为一个压缩过后的可以执行的字符串.
 
-The `$detail` parameter controls whether to walk recursively into nested objects or not.
+`$detail`参数控制是否对嵌套对象进行递归.
 
 Example with a simple 2D array:
 
@@ -623,7 +623,7 @@ echo $f3->stringify($car);
 
 ### csv
 
-**Flatten array values and return as CSV string**
+**将数组值转成以逗号分隔的字符串**
 
 ```php
 string csv ( array $args )
@@ -633,12 +633,12 @@ Usage:
 
 ```php
 $elements = array('water','earth','wind','fire');
-echo $f3->csv($elements); // displays 'water','earth','wind','fire' // including single quotes
+echo $f3->csv($elements); // displays 'water','earth','wind','fire' // including single quotes 包含单引号
 ```
 
 ### camelcase
 
-**Convert snake_case string to camelCase**
+**转换`foo_bar`下划线连字拼写法为`fooBar`驼峰式拼写法**
 
 ```php
 string camelcase ( string $str )
@@ -652,7 +652,7 @@ $f3->camelcase($str_s_c); // returns 'userName'
 ```
 ### snakecase
 
-**Convert camelCase string to snake_case**
+**转换`fooBar`驼峰式拼写法为`foo_bar`下划线连字拼写法**
 
 ```php
 string snakecase ( string $str )
@@ -667,7 +667,7 @@ $f3->snakecase($str_CC); // returns 'user_name'
 
 ### sign
 
-**Return -1 if specified number is negative, 0 if zero,	or 1 if the number is positive**
+**传入参数为负数时返回-1,为0时返回0,正数时返回1**
 
 ```php
 int sign ( mixed $num )
@@ -675,13 +675,13 @@ int sign ( mixed $num )
 
 ### hash
 
-**Generate 64bit/base36 hash**
+**生成 64bit/base36 哈希**
 
 ```php
 string hash ( string $str )
 ```
 
-Generates a 11-characters length hash for a given string
+为传入参数生成11位字符的哈希值
 
 Example:
 
@@ -691,7 +691,7 @@ $f3->hash('foobar'); // returns '0i43fmgps1r' (length=11)
 
 ### base64
 
-**Return Base64-encoded equivalent**
+**返回以base64编码的等价字符(即以base64方式编码数据涵盖图片)**
 
 ```php
 string base64 ( string $data, string $mime )
@@ -706,13 +706,13 @@ echo $f3->base64('<h1>foobar</h1>','text/html');
 
 ### encode
 
-**Convert special characters to HTML entities**
+**转换特殊字符为HTML实体字符**
 
 ```php
 string encode ( string $str )
 ```
 
-Encodes symbols like `& " ' < >` and other chars, based on your applications ENCODING setting. (default: UTF-8)
+编码形如`& " ' < >`的字符为其他字符,该操作基于你的应用设定的编码字符集(默认为UTF-8)
 
 Example:
 
@@ -726,7 +726,7 @@ echo $f3->encode("§9: convert symbols & umlauts like ä ü ö");
 
 ### decode
 
-**Convert HTML entities back to characters**
+**将HTML实体字符解码为原字符**
 
 ```php
 string decode ( string $str )
